@@ -1,0 +1,2 @@
+const mongoose = require('mongoose');
+module.exports = mongoose.connect('mongodb://bzgrkyjonrerd8i-mongodb.services.clever-cloud.com:27017/bzgrkyjonrerd8i', { useNewUrlParser: true, useUnifiedTopology: true});
