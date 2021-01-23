@@ -5,7 +5,9 @@ You will need to create roles "Unverified", "Verified". And create the Channel "
 
 # Adding: 
 -Ticket system
+
 -Redone Polls
+
 -Music
 # Removed: 
 -Polls
