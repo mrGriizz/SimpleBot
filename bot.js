@@ -5,7 +5,7 @@ const { registerCommands, registerEvents } = require('./utils/registry');
 
 client.on('ready', () => {
     console.log(`Bot has logged in.`);
-    client.user.setActivity('Porn', { type: "WATCHING"})
+    client.user.setActivity('Your Messages!', { type: "WATCHING"})
     .catch(console.error);
 });
 
