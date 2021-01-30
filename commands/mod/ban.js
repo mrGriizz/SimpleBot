@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const prefix = '!'
+const PREFIX = process.env.PREFIX;
 
 module.exports = {
     aliases: ['Ban'],

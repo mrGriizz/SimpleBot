@@ -2,7 +2,7 @@ const { MessageEmbed } = require(`discord.js`); //for embed functionality
 let sendMessage = require(`../../modules/sendMessage.js`);
 
 module.exports = {
-    aliases: ['Server-Stats'],
+    aliases: ['server-stats', 'stats', 'server'],
     description: 'The Servers Stats',
     run: async(client, message, args) => { 
 			function checkBots(guild) {
