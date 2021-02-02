@@ -7,3 +7,5 @@ You will need to create roles "Unverified", "Verified". And create the Channel "
 - Reasoning for moderation commands.
 - Help Commands for types of commands.
 - Updated/Fixed Polls.
+- Added tickets
+- Updated help messages, added help messages for each field of command.
