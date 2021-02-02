@@ -1,15 +1,17 @@
-const {Message, MessageEmbed}= require('discord.js')
-const ms = require('ms')
+const {Message, MessageEmbed, DiscordAPIError, Client}= require('discord.js');
+const ms = require('ms');
 
 module.exports = {
-  aliases: ['Mute'],
+  aliases: ['mute'],
   description: 'Mutes Users',
     /**
      * @param {Message} message
      */
-    run: async(client, message, args) => {
+    run: async(client, message) => {
+        let args = message.content.split(" ");
+        let reason = args.slice(2).join(" ");
         if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send('You do not have permissions to use this command')
-        const Member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
+        const Member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
         if(!Member) return message.channel.send('Member is not found.')
         const role = message.guild.roles.cache.find(role => role.name.toLowerCase() === 'muted')
         if(!role) {
@@ -33,9 +35,13 @@ module.exports = {
                 console.log(error)
             }
         };
-        let role2 = message.guild.roles.cache.find(r => r.name.toLowerCase() === 'muted')
-        if(Member.roles.cache.has(role2.id)) return message.channel.send(`${Member.displayName} has already been muted.`)
-        await Member.roles.add(role2)
-        message.channel.send(`${Member.displayName} is now muted.`)
+        let mutedRole = message.guild.roles.cache.find(r => r.name.toLowerCase() === 'muted')
+        if(Member.roles.cache.has(mutedRole.id)) return message.channel.send(`@${Member.displayName} has already been muted.`)
+        if(reason.length<1) {
+            return message.channel.send('There is no reason provided.');
+        } else {
+            message.channel.send(`@${Member.displayName} has been muted for ${reason}.`);
+            Member.roles.add(mutedRole);
+        }
     }
 }

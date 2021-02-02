@@ -1,4 +1,4 @@
-const { MessageEmbed } = require(`discord.js`); //for embed functionality 
+const { MessageEmbed } = require(`discord.js`); 
 let sendMessage = require(`../../modules/sendMessage.js`);
 
 module.exports = {

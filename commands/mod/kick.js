@@ -1,15 +1,23 @@
-const { MessageEmbed, DiscordAPIError, MessageManager } = require(`discord.js`);
+const Discord = require('discord.js');
+const PREFIX = process.env.PREFIX;
 
 module.exports = {
     aliases: ['Kick'],
-    description: 'Kicks Users',
-	run: async(client, message, args) => {
-        var args = Array.prototype.slice.call(arguments);
+    description: 'Kicks Members',
+	run: async(client, message) => {
+        let args = message.content.split(" ");
+        let reason = args.slice(2).join(" ");
         if(!message.guild.me.hasPermission('KICK_MEMBERS')) return message.channel.send('You do not have permissions to do this!');
-        const Member = message.mentions.members.first()
-        if(!Member) return message.channel.send('Please specify a member to kick!');
+        const member = message.mentions.members.first()
+        if(!member) return message.channel.send('Please specify a member to ban!');
 
-        await Member.kick({ reason: args.slice(1).join(" ")});  
-        message.channel.send(`${Member.user.tag} was kicked from ${Member.guild.name}`);
+        if(reason.length<1) {
+            return message.channel.send('There is no reason provided.');
+        } else {
+            (member.kickable); {
+                member.kick();
+            }
+            message.channel.send(`@${member.displayName} has been kicked for ${reason}.`);
+        }
     }
 }

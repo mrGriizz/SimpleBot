@@ -1,6 +1,5 @@
-const { DiscordAPIError } = require("discord.js");
-const discord = require('discord.js');
-const { Client, MessageEmbed } = require('discord.js');
+const { DiscordAPIError, Client, discord, MessageEmbed } = require("discord.js");
+const { QueryCursor } = require("mongoose");
 const userCreatedPolls = new Map();
 const PREFIX = process.env.PREFIX;
 
@@ -12,10 +11,12 @@ module.exports = {
             message.delete();
         }
         if(message.author.bot) return;
-        if(message.content.toLowerCase().startsWith(`${PREFIX}poll`)) {
             let args = message.content.split(" ");
             let question = args.slice(2).join(" ");
             let regex = new RegExp(/^([0-9]{2}|[0-9]{1})[sSmM]$/);
+            if(question.length<1) {
+                return message.channel.send('Invalid Poll. Please use this command ```(question1) or (question2).```');
+            } else {
                 const embed = new MessageEmbed()
                     .setTitle(question)
                     .setDescription('React with 👍 or 👎')
@@ -37,11 +38,10 @@ module.exports = {
                     let msg = await message.channel.send(embed);
                     await msg.react('👍');
                     await msg.react('👎');
-                }
-                catch(err) {
+                } catch(err) {
                     console.log(err);
                 }
             }
+            }
         }
-    }
 
